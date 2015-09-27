@@ -24,7 +24,7 @@ func main() {
 	for {
 		select {
 		case rs := <-results:
-			log.Debug(fmt.Sprintf("got results lol %v", rs))
+			log.Debug(fmt.Sprintf("handling benchmark: %v", rs))
 			api.Lock()
 			api.Results = append(api.Results, rs)
 			api.Unlock()
