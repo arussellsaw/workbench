@@ -6,25 +6,21 @@
     workbench
   </div>
 </md-toolbar>
-<div layout="row" flex>
-    <div layout="column" flex id="content">
-        <md-content layout="column" flex class="md-padding">
-            <md-card>
-                <div layout="row" layout-sm="column" layout-align="space-around" height="400px">
-                    <flot ng-show="showGraph" id="graph" dataset="chartData" options="chartOptions" height="100%" width="100%"></flot>
-                    <md-progress-circular ng-hide="showGraph" md-mode="indeterminate"></md-progress-circular>
+
+<div class='md-padding' layout="row" layout-wrap>
+    <md-card style="width: 400px;" ng-repeat="series in chartData" ng-animate="'animate'">
+        <flot ng-show="showGraph" class="graph" dataset="series.points" options="chartOptions"></flot>
+        <md-card-content>
+            <div layout="row">
+                <div flex="80">
+                    {{series.name}}
+                    <br/>
+                    <span class="md-display-1">{{series.current}} <span class="md-subhead">ms</span></span>
                 </div>
-                <md-card-content>
-                    <h2 class="md-title">Benchmarks</h2>
-                        <span class="md-display-2">11 <span class="md-display-1">ms</span></span>
-                    <p>
-                        Here's a graph of your current benchmark performance.
-                    </p>
-                    <p>
-                        Hopefully in future this will have more info!
-                    </p>
-                </md-card-content>
-            </md-card>
-        </md-content>
-    </div>
+                <div flex="20">
+                    <span ng-class="{'color-red': series.change > 0, 'color-green': series.change < 0, 'color-non': series.change === 0}">{{series.change}}</span>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
 </div>

@@ -145,6 +145,7 @@ func parse(output []byte) ([]Benchmark, bool) {
 			bm.OpTime = opTime
 
 			allocs, err := strconv.ParseInt(words[4], 10, 64)
+			log.Debug(fmt.Sprint(allocs))
 			bm.Allocs = int(allocs)
 			if err != nil {
 				log.Error(err.Error())
