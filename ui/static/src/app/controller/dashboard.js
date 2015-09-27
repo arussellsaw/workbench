@@ -10,8 +10,9 @@ define([], function () {
                 show: true,
                 lineWidth: 5
             },
-            splines: {
-                show: true
+            points: {
+                show: true,
+                radius: 5
             },
             grid: {
                 show: false,
@@ -25,7 +26,6 @@ define([], function () {
             $scope.i = 0
             $http.get("/fetch").then(function(response) {
                 angular.forEach(response.data, function(benchmark) {
-                    console.log(benchmark)
                     $scope.chartData[$scope.i] = {
                         points: [],
                         current : benchmark.Points[benchmark.Points.length - 1][1] / 1000000,
@@ -45,7 +45,6 @@ define([], function () {
             });
         }
         $interval(updateGraph, 5000)
-
     }
 
     controller.$inject=['$scope', '$http', '$interval'];
