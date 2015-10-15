@@ -5,12 +5,9 @@ function (dashboardController) {
 
     var app = angular.module('workbench', ['ngRoute', 'ngMaterial'])
     .config(function($mdThemingProvider) {
-        $mdThemingProvider.theme('default')
-            .primaryPalette('pink')
-            .accentPalette('orange');
+        $mdThemingProvider.theme('default');
     });
 
-    //module config
     app.config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/dashboard', {
@@ -20,7 +17,6 @@ function (dashboardController) {
             .otherwise({redirectTo: '/dashboard'});
     }]);
 
-    //register controllers
     app.controller('dashboardController', dashboardController);
 
 });

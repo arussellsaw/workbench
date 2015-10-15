@@ -8,11 +8,11 @@ define([], function () {
             },
             lines: {
                 show: true,
-                lineWidth: 5
+                lineWidth: 4
             },
             points: {
                 show: true,
-                radius: 5
+                radius: 4
             },
             grid: {
                 show: false,
@@ -22,6 +22,14 @@ define([], function () {
             highlightColor: 10
         }
         $scope.chartData = []
+
+        $http.get("/package").then(
+            function(response) {
+                $scope.packageName = response.data
+            },
+            function(response){}
+        );
+
         function updateGraph() {
             $scope.i = 0
             $http.get("/fetch").then(function(response) {
@@ -44,6 +52,7 @@ define([], function () {
             function(response) {
             });
         }
+        updateGraph()
         $interval(updateGraph, 5000)
     }
 

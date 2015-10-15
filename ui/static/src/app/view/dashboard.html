@@ -1,15 +1,14 @@
 <md-toolbar layout="row">
   <div class="md-toolbar-tools">
-    <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
-      <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
-    </md-button>
-    workbench
+    {{packageName}}
   </div>
 </md-toolbar>
 
 <div class='md-padding' layout="row" layout-wrap>
     <md-card style="width: 400px;" ng-repeat="series in chartData" ng-animate="'animate'">
-        <flot ng-show="showGraph" class="graph" dataset="series.points" options="chartOptions"></flot>
+        <flot ng-show="showGraph"
+            ng-class="{'graph-bad': series.change > 0, 'graph-good': series.change < 0, 'graph-neutral': series.change === 0}"
+            dataset="series.points" options="chartOptions" width="100%" height="150px"></flot>
         <md-card-content>
             <div layout="row">
                 <div flex="80">
@@ -17,8 +16,8 @@
                     <br/>
                     <span class="md-display-1">{{series.current}} <span class="md-subhead">ms</span></span>
                 </div>
-                <div flex="20">
-                    <span ng-class="{'color-red': series.change > 0, 'color-green': series.change < 0, 'color-non': series.change === 0}">{{series.change}}</span>
+                <div class="side-stats" flex="20">
+                    <span ng-class="{'color-bad': series.change > 0, 'color-good': series.change < 0, 'color-neutral': series.change === 0}">{{series.change}}</span>
                 </div>
             </div>
         </md-card-content>

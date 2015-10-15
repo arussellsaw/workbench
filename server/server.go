@@ -23,6 +23,7 @@ type APIServer struct {
 func (s *APIServer) Run() {
 	r := mux.NewRouter()
 	r.HandleFunc("/fetch", s.fetch)
+	r.HandleFunc("/package", s.getPkg)
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
@@ -40,6 +41,10 @@ func (s *APIServer) Run() {
 type resultFormat struct {
 	Name   string
 	Points [][2]float64
+}
+
+func (s *APIServer) getPkg(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(s.Results[0].Package))
 }
 
 func (s *APIServer) fetch(w http.ResponseWriter, r *http.Request) {
